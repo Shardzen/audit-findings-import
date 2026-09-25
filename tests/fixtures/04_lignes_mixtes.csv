@@ -1,0 +1,14 @@
+ref,asset,title,severity,detected_on
+AUD-101,Server01,OK Ticket,faible,2026-09-01
+,Server02,Ref manquant,moyenne,2026-09-02
+AUD-103,,Asset manquant,moyenne,2026-09-03
+AUD-104,Server04,,forte,2026-09-04
+AUD-105,Server05,Severity invalide,SuperCritique,2026-09-05
+AUD-106,Server06,Date invalide,faible,2026-13-01
+AUD-107,Server07,Date invalide,faible,2026-02-30
+AUD-108,Server08,Date invalide,faible,01/09/2026
+AUD-109,Server09,Date texte,faible,hier
+AUD-110,Server10,Trop de colonnes,faible,2026-09-06,extra_data
+AUD-111,Server11,Pas assez colonnes
+,,Multi erreurs,Forte,2026-99-99
+ 
