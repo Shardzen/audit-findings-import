@@ -37,3 +37,8 @@ with open('07_reimport.csv', "r", encoding="utf-8") as fichier:
     reader = csv.DictReader(fichier)
     for ligne in reader:
         print(ligne)
+
+with open('08_bom.csv', "r", encoding="utf-8 bom") as fichier:
+    reader = csv.DictReader(fichier)
+    for ligne in reader:
+        print(ligne)
