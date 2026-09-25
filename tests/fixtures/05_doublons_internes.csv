@@ -1,0 +1,5 @@
+ref,asset,title,severity,detected_on
+AUD-200,Server01,Ticket original,faible,2026-09-01
+AUD-200,Server01,Doublon 1,moyenne,2026-09-02
+AUD-200,Server01,Doublon 2,forte,2026-09-03
+ 
