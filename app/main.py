@@ -26,7 +26,3 @@ register_error_handlers(app)
 
 app.include_router(auth.router)
 app.include_router(imports.router)
-# Partie Rayan : décommenter quand app/routers/findings.py existe
-# from app.routers import findings
-# app.include_router(findings.router)
-
