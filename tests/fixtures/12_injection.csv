@@ -1,0 +1,5 @@
+ref,asset,title,severity,detected_on
+REF-601,Server01,=SUM(1+1),faible,2026-09-01
+REF-602,Server02,+cmd|' /C calc'!A0,moyenne,2026-09-02
+REF-603,Server03,-100,forte,2026-09-03
+REF-604,Server04,@eval(alert(1)),critique,2026-09-04

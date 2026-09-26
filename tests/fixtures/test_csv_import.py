@@ -42,3 +42,23 @@ with open('08_bom.csv', "r", encoding="utf-8-sig") as fichier:
     reader = csv.DictReader(fichier)
     for ligne in reader:
         print(ligne)
+
+with open('09_vide.csv', "r", encoding="utf-8-sig") as fichier:
+    reader = csv.DictReader(fichier)
+    for ligne in reader:
+        print(ligne)
+
+with open('10_ordre_colonnes.csv', "r", encoding="utf-8-sig") as fichier:
+    reader = csv.DictReader(fichier)
+    for ligne in reader:
+        print(ligne)
+
+with open('11_espaces.csv', "r", encoding="utf-8-sig") as fichier:
+    reader = csv.DictReader(fichier)
+    for ligne in reader:
+        print(ligne)
+
+with open('12_injection.csv', "r", encoding="utf-8-sig") as fichier:
+    reader = csv.DictReader(fichier)
+    for ligne in reader:
+        print(ligne)

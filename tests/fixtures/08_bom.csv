@@ -1,2 +1,3 @@
-\ufeffref,asset,title,severity,detected_on"
-"AUD-400,Server01,BOM test,faible,2026-09-01
+ref,asset,title,severity,detected_on
+BOM-001,srv-web-01,Fichier avec BOM,forte,2026-05-01
+BOM-002,srv-web-02,Deuxième ligne,faible,2026-05-02
