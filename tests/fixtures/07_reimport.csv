@@ -1,6 +1,6 @@
 ref,asset,title,severity,detected_on
-AUD-001,Server01,Database error,high,2026-09-01
-AUD-002,Server02,Disk full,medium,2026-09-02
-AUD-003,Server03,CPU spike,low,2026-09-03
-AUD-004,Server04,Memory leak,high,2026-09-04
-AUD-005,Server05,Network drop,critical,2026-09-05
+AUD-001,Server01,Database error,forte,2026-09-01
+AUD-002,Server02,Disk full,moyenne,2026-09-02
+AUD-003,Server03,CPU spike,faible,2026-09-03
+AUD-004,Server04,Memory leak,forte,2026-09-04
+AUD-005,Server05,Network drop,critique,2026-09-05
