@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
+from datetime import date, datetime
 
 from app.db import get_db
 from app.models import Finding, User
@@ -15,9 +16,9 @@ class FindingResponse(BaseModel):
     severity : str
     detected_on : date 
     status : str
-    created_at : date
-    resolved_at : date
-    resoled_by : date
+    created_at : datetime
+    resolved_at : Optional[datetime] = None
+    resoled_by : Optional[str] = None
 
     model_config = ConfigDict(from_attributes=True)
 
