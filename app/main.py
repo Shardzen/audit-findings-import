@@ -5,7 +5,7 @@ from fastapi import FastAPI
 
 from app.db import init_db
 from app.errors import register_error_handlers
-from app.routers import auth, imports
+from app.routers import auth, findings, imports
 
 logging.basicConfig(level=logging.INFO)
 
