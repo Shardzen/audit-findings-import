@@ -64,18 +64,18 @@ with open('12_injection.csv', "r", encoding="utf-8-sig") as fichier:
         print(ligne)
 
 def valider_ligne(ligne):
+    erreurs = []
     if not ligne['ref']:
-        return (False, "ref manquante")
-    elif not ligne['asset']:
-        return (False, "asset manquant")
-    elif not ligne['title']:
-        return (False, "title manquant")
-    elif not ligne['severity']:
-        return (False, "severity manquant")
-    elif not ligne['detected_on']:
-        return (False, "detected_on manquant")
+        erreurs.append("ref manquante")
+    if not ligne['asset']:
+        erreurs.append("asset est vide")
+
+    if not ligne['title']:
+        erreurs.append ("title manquant")
+    if not ligne['severity']:
+        erreurs.append ("severity manquant")
+    if not ligne['detected_on']:
+        erreurs.append ("detected_on manquant")
     else:
         return (True, None)
-    
-print(valider_ligne({'ref': 'AUD-001', 'asset': '', 'title': 'x', 'severity': 'forte', 'detected_on': '2026-09-01'}))
-print(valider_ligne({'ref': '', 'asset': 'Server01', 'title': '', 'severity': 'forte', 'detected_on': '2026-09-01'}))
+                    
