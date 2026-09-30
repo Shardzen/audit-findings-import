@@ -76,6 +76,4 @@ def valider_ligne(ligne):
         erreurs.append ("severity manquant")
     if not ligne['detected_on']:
         erreurs.append ("detected_on manquant")
-    else:
-        return (True, None)
-                    
+    return erreurs
