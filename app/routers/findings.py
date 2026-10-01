@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from datetime import date, datetime
 
 from app.db import get_db
+from app.errors import AppError
 from app.models import Finding, User
 from app.security import require_role, get_current_user
 from pydantic import BaseModel, ConfigDict
@@ -54,4 +55,15 @@ def list_findings(
         .all()
     )
     return PaginatedFindings(items=items, page=page, per_page=per_page, total=total)
+
+@router.get("/{finding_id}", response_model=FindingResponse)
+def get_finding(
+    finding_id: int = Path(...),
+    db: Session = Depends(get_db),
+    user: User = Depends(get_current_user),
+):
+    finding = db.get(Finding, finding_id)
+    if finding is None:
+        raise AppError(404, "not_found", f"Constat {finding_id} introuvable")
+    return finding
 
