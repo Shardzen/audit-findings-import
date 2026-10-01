@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 
 from app.db import get_db
 from app.models import Finding
-from app.security import get_current_user
+from app.security import get_current_user, require_role
 from datetime import datetime
 
 router = APIRouter(prefix="/imports", tags=["imports"])
@@ -15,7 +15,7 @@ router = APIRouter(prefix="/imports", tags=["imports"])
 async def import_csv(
     file: UploadFile = File(...),
     db: Session = Depends(get_db),
-    current_user: dict = Depends(get_current_user),
+    current_user: dict = Depends(require_role("auditeur")),
 ):
     if not file.filename.endswith(".csv"):
         raise HTTPException(
@@ -23,7 +23,7 @@ async def import_csv(
         )
 
     content = await file.read()
-    decoded = content.decode("utf-8")
+    decoded = content.decode("utf-8-sig")
     reader = csv.DictReader(io.StringIO(decoded))
 
     imported_findings = []
@@ -45,7 +45,7 @@ async def import_csv(
             title=row.get("title"),
             severity=row.get("severity"),
             detected_on=detected_on_val,
-            status=row.get("status", "open"),
+            status="ouvert",
         )
         db.add(finding)
         imported_findings.append(finding)
