@@ -67,3 +67,34 @@ def get_finding(
         raise AppError(404, "not_found", f"Constat {finding_id} introuvable")
     return finding
 
+@router.patch("/{finding_id}/resolve", response_model=FindingResponse)
+def resolve_finding(
+    finding_id: int = Path(...),
+    db: Session = Depends(get_db),
+    user: User = Depends(require_role("responsable")),
+):
+    # Vérification  404
+    finding = db.get(Finding, finding_id)
+    if finding is None:
+        raise AppError(404, "not_found", f"Constat {finding_id} introuvable")
+
+    rows_updated = (
+        db.query(Finding)
+        .filter(Finding.id == finding_id, Finding.status == "ouvert")
+        .update(
+            {
+                "status": "corrige",
+                "resolved_at": datetime.utcnow(),
+                "resolved_by": user.username,
+            },
+            synchronize_session=False,
+        )
+    )
+    db.commit()
+
+    # Si non modifié alors déjà corrigé 409
+    if rows_updated == 0:
+        raise AppError(409, "already_resolved", "Constat déjà corrigé")
+
+    db.refresh(finding)
+    return finding
