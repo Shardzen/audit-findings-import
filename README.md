@@ -13,6 +13,7 @@ API et commande en ligne permettant d'importer des constats d'audit (fichiers CS
 python -m venv venv
 .\venv\Scripts\Activate.ps1
 pip install -r requirements.txt
+ 
 ```
 
 ### Variables d'environnement
@@ -36,6 +37,7 @@ La base de données par défaut est SQLite (fichier local `audit.db`), aucune in
 ```powershell
 uvicorn app.main:app --reload
 ```
+Si API ne se lance pas immédiatement, installer la dépendance pip install python-multipart
 
 L'API est alors disponible sur `http://127.0.0.1:8000`, avec la documentation interactive sur `http://127.0.0.1:8000/docs`.
 
