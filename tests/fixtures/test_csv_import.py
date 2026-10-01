@@ -1,6 +1,7 @@
 ﻿import os
 import csv
 #from api import FastAPI
+from datetime import datetime
 
 with open('01_valide.csv', "r", encoding="utf-8-sig") as fichier:
     reader = csv.DictReader(fichier)
@@ -64,16 +65,23 @@ with open('12_injection.csv', "r", encoding="utf-8-sig") as fichier:
         print(ligne)
 
 def valider_ligne(ligne):
+   
     erreurs = []
+
     if not ligne['ref']:
         erreurs.append("ref manquante")
     if not ligne['asset']:
         erreurs.append("asset est vide")
-
     if not ligne['title']:
         erreurs.append ("title manquant")
-    if not ligne['severity']:
-        erreurs.append ("severity manquant")
-    if not ligne['detected_on']:
-        erreurs.append ("detected_on manquant")
+    if ligne['severity'] not in ['faible', 'moyenne', 'forte']:
+        erreurs.append("severity doit valoir faible, moyenne ou forte")
+    try:
+        datetime.strptime(ligne['detected_on'], "%Y-%m-%d")
+    except (ValueError, TypeError):
+        erreurs.append("detected_on doit être une date YYYY-MM-DD valide")
+
     return erreurs
+
+
+
