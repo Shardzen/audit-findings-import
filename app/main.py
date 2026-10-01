@@ -26,3 +26,4 @@ register_error_handlers(app)
 
 app.include_router(auth.router)
 app.include_router(imports.router)
+app.include_router(findings.router)
