@@ -4,6 +4,7 @@ import io
 import json
 import sys
 from pathlib import Path
+from datetime import datetime 
 
 from app.db import SessionLocal
 from app.models import Finding
@@ -83,7 +84,6 @@ def executer_import(chemin_fichier: Path, dry_run: bool = False):
                 refs_in_file.add(ref)
                 inserted += 1
 
-            # Si dry-run, on annule l'écriture en base
             if dry_run:
                 db.rollback()
             else:
