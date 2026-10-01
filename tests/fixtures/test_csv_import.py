@@ -25,15 +25,15 @@ def valider_ligne(ligne):
     return erreurs
 
 def lire_fixture(nom_fichier):
-    chemin_fichier = FIXTURES_DIR / nom_fichier
-    with open(chemin_fichier, "r", encoding="utf-8-sig") as fichier:
+    file_path = FIXTURES_DIR / nom_fichier
+    with open(file_path, "r", encoding="utf-8-sig") as fichier:
         reader = csv.DictReader(fichier)
         return list(reader)
 
 
 def lire_fixture(nom_fichier):
-    chemin_fichier = FIXTURES_DIR / nom_fichier
-    with open(chemin_fichier, "r", encoding="utf-8-sig") as fichier:
+    file_path = FIXTURES_DIR / nom_fichier
+    with open(file_path, "r", encoding="utf-8-sig") as fichier:
         reader = csv.DictReader(fichier)
         return list(reader)
 
