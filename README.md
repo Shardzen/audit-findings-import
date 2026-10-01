@@ -140,4 +140,18 @@ curl -H "Authorization: Bearer $TOKEN" http://localhost:8000/findings/12
 ```bash
 curl -X PATCH -H "Authorization: Bearer $TOKEN_RESP" \
   http://localhost:8000/findings/12/resolve
+
+  
 ```
+
+## Documentation API & Swagger
+
+L'API documente l'ensemble de ses routes via Swagger / OpenAPI.
+
+* **Swagger UI** : Accessible directement sur `/docs` en mode développement.
+* **Sécurité** : Aucun mot de passe ni clé JWT ne sont commités sur Git. Le fichier `.env.example` contient les variables d'environnement à configurer localement dans un fichier `.env`.
+
+### Changements de routes / Noms des endpoints
+- `/auth/login` : Route dédiée à la récupération du jeton d'accès.
+- `/imports/csv` : Route gérant le versement et la validation des fichiers CSV (fixtures).
+- `/findings` : Route de consultation des constats importés.

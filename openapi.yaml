@@ -1,0 +1,76 @@
+openapi: 3.0.3
+info:
+  title: API Audit Findings Import
+  description: Documentation des routes pour la gestion des constats d'audit et l'import CSV.
+  version: 1.0.0
+
+paths:
+  /auth/login:
+    post:
+      summary: Authentification utilisateur
+      description: Génère un token JWT.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username: { type: string, example: "admin" }
+                password: { type: string, example: "Secret123!" }
+      responses:
+        '200':
+          description: Authentification réussie
+        '401':
+          description: Identifiants invalides
+
+  /imports/csv:
+    post:
+      summary: Importer un fichier CSV d'audit
+      description: Reçoit un fichier CSV pour analyse et enregistrement.
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Fichier importé et traité avec succès
+        '400':
+          description: Fichier invalide, colonnes manquantes ou format incorrect
+        '401':
+          description: Non authentifié
+        '403':
+          description: Rôle insuffisant (Admin requis)
+        '422':
+          description: Erreur de validation de contenu
+
+  /findings:
+    get:
+      summary: Lister les constats d'audit
+      description: Renvoie la liste des constats avec filtres optionnels.
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: limit
+          in: query
+          schema: { type: integer, default: 50 }
+      responses:
+        '200':
+          description: Liste des constats
+        '401':
+          description: Non authentifié
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
