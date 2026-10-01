@@ -2,7 +2,7 @@ import csv
 import io
 from datetime import date, datetime
 
-from fastapi import APIRouter, Depends, File, UploadFile
+from fastapi import APIRouter, Depends, File, Query ,UploadFile
 from sqlalchemy.orm import Session
 
 from app.db import get_db
@@ -35,6 +35,7 @@ def valider_ligne(row: dict) -> list[str]:
 @router.post("")
 async def import_csv(
     file: UploadFile = File(...),
+    dry_run: bool = Query(False, alias="dry-run", description="Simule l'import sans écrire en BDD"),
     db: Session = Depends(get_db),
     current_user: dict = Depends(require_role("auditeur")),
 ):
@@ -88,7 +89,10 @@ async def import_csv(
         refs_in_file.add(ref)
         inserted += 1
 
-    db.commit()
+    if dry_run:
+        db.rollback()
+    else:
+        db.commit()
 
     return {
         "total_lines": total_lines,
