@@ -3,22 +3,22 @@ import csv
 from pathlib import Path
 from datetime import datetime
 
-FIXTURES_DIR = Path(__file__).parent / "fixtures"
+FIXTURES_DIR = Path(__file__).parent 
 
 def valider_ligne(ligne):
-   
     erreurs = []
 
-    if not ligne['ref']:
+    if not ligne.get("ref"):
         erreurs.append("ref manquante")
-    if not ligne['asset']:
+    if not ligne.get("asset"):
         erreurs.append("asset est vide")
-    if not ligne['title']:
-        erreurs.append ("title manquant")
-    if ligne['severity'] not in ['faible', 'moyenne', 'forte']:
+    if not ligne.get("title"):
+        erreurs.append("title manquant")
+    if ligne.get("severity") not in ["faible", "moyenne", "forte"]:
         erreurs.append("severity doit valoir faible, moyenne ou forte")
+
     try:
-        datetime.strptime(ligne['detected_on'], "%Y-%m-%d")
+        datetime.strptime(ligne.get("detected_on", ""), "%Y-%m-%d")
     except (ValueError, TypeError):
         erreurs.append("detected_on doit être une date YYYY-MM-DD valide")
 
