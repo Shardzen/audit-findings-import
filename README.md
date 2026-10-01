@@ -15,6 +15,16 @@ python -m venv venv
 pip install -r requirements.txt
  
 ```
+###  Ajouter `python-multipart` dans le bloc d'installation
+Au lieu d'avoir un texte prévenant d'installer `python-multipart` si ça plante, ajouter directement dans les commandes d'installation pour que ce soit fluide pour le correcteur :
+
+```powershell
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+pip install python-multipart pytest
+```
+
 
 ### Variables d'environnement
 
@@ -95,7 +105,7 @@ python -m app.cli import fichier.csv
 ## Lancer les tests
 
 ```powershell
-pytest
+python -m pytest
 ```
 
 ## Choix de sécurité
