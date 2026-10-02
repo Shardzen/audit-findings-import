@@ -38,21 +38,21 @@ def create_access_token(user: User) -> str:
     return jwt.encode(payload, JWT_SECRET, algorithm=JWT_ALGORITHM)
 
 
-def _unauthorized(msg: str = "Authentification requise") -> AppError:
+def unauthorized_error(msg: str = "Authentification requise") -> AppError:
     return AppError(401, "unauthorized", msg, headers={"WWW-Authenticate": "Bearer"})
 
 
 def get_current_user(token: str | None = Depends(oauth2_scheme), db: Session = Depends(get_db)) -> User:
     if not token:
-        raise _unauthorized()
+        raise unauthorized_error()
     try:
         payload = jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM], options={"require": ["exp", "sub"]})
         user_id = int(payload["sub"])
     except (jwt.PyJWTError, ValueError):
-        raise _unauthorized("Token invalide ou expiré")
+        raise unauthorized_error("Token invalide ou expiré")
     user = db.get(User, user_id)
     if user is None:
-        raise _unauthorized("Token invalide ou expiré")
+        raise unauthorized_error("Token invalide ou expiré")
     return user
 
 
